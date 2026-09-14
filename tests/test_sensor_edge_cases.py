@@ -10,13 +10,21 @@ from custom_components.pgnig_gas_sensor.coordinator import PgnigData
 from custom_components.pgnig_gas_sensor.sensor import (
     PgnigCostTrackingSensor,
     PgnigInvoiceSensor,
+    PgnigMarginalPriceSensor,
+    PgnigReadingDateSensor,
     PgnigSensor,
     entities_for_meters,
 )
 
 from .builders import build_stub_coordinator, make_invoice, make_reading
 
-SENSOR_CLASSES = [PgnigSensor, PgnigInvoiceSensor, PgnigCostTrackingSensor]
+SENSOR_CLASSES = [
+    PgnigSensor,
+    PgnigInvoiceSensor,
+    PgnigCostTrackingSensor,
+    PgnigReadingDateSensor,
+    PgnigMarginalPriceSensor,
+]
 
 
 # --- identity ----------------------------------------------------------
@@ -28,6 +36,8 @@ SENSOR_CLASSES = [PgnigSensor, PgnigInvoiceSensor, PgnigCostTrackingSensor]
         (PgnigSensor, "pgnig_sensorMETER-X_42"),
         (PgnigInvoiceSensor, "pgnig_invoice_sensorMETER-X_42"),
         (PgnigCostTrackingSensor, "pgnig_cost_tracking_sensorMETER-X_42"),
+        (PgnigReadingDateSensor, "pgnig_reading_dateMETER-X_42"),
+        (PgnigMarginalPriceSensor, "pgnig_marginal_priceMETER-X_42"),
     ],
 )
 async def test_unique_id_format(hass: HomeAssistant, sensor_class, expected):
@@ -42,6 +52,8 @@ async def test_unique_id_format(hass: HomeAssistant, sensor_class, expected):
         (PgnigSensor, "Orlen Gas Sensor M1 1"),
         (PgnigInvoiceSensor, "Orlen Gas Invoice Sensor M1 1"),
         (PgnigCostTrackingSensor, "Orlen Gas Cost Tracking Sensor M1 1"),
+        (PgnigReadingDateSensor, "Orlen Gas Reading Date M1 1"),
+        (PgnigMarginalPriceSensor, "Orlen Gas Marginal Price M1 1"),
     ],
 )
 async def test_name_format(hass: HomeAssistant, sensor_class, expected):
